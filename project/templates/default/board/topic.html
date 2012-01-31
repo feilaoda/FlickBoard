@@ -121,16 +121,14 @@ function reply(username){
 		
 		<dd class="newsTitle">
 		  {% if topic.title %}
-<h5>{{topic.title}}</h5>
+			<h5>{{topic.title}}</h5>
+			{% endif %}
+		{{topic.html_content}}
+
+{% if topic_more_content %}
+<p></p>{{ topic_more_content }}
 {% endif %}
-	{{topic.html_content}}
-{% if topic.media_content %}
-{{topic.media_content}}
-{% endif %}
-<br/><br/>
-{% if topic.more_content %}
-{{topic.html_more_content}}
-{% endif %}
+
 		  
 		    <div class="newsSubtitle">
 <!--

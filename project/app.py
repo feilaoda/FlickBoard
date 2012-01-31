@@ -60,8 +60,6 @@ class Application(web.Application):
             # auth secret
             twitter_consumer_key=options.twitter_consumer_key,
             twitter_consumer_secret=options.twitter_consumer_secret,
-            friendfeed_consumer_key=options.friendfeed_consumer_key,
-            friendfeed_consumer_secret=options.friendfeed_consumer_secret,
             facebook_api_key=options.facebook_api_key,
             facebook_secret=options.facebook_secret,
         )

@@ -77,14 +77,16 @@
 						<div class="newsTitle">
 							
 							{{topic.html_content}}
-							{% if topic.media_content %}
-							{{topic.media_content}}
+							{% if topic.extra_content %}
+							{{topic.extra_content}}
 						{% endif %}
 						
 						{% if topic.more_content %}
-							<a href="{{topic_link}}" title="更多内容"> <span><small class="gray">更多...</small></span> </a>
-						{% endif %}
+							<a href="javascript:;" title="更多内容" id="newsMoreAction{{topic.id}}" onclick="load_morecontent('{{topic.id}}')"> <span><small>.&nbsp;.&nbsp;.</small></span> </a>
+							<p><div id="newsMore{{topic.id}}" class="newsMoreContent"></div></p>
 						
+						{% endif %}
+							
 							{% if topic.images %}
 								<div class="newsPreview">
 								{% for img in topic.images %}

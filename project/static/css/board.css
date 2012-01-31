@@ -79,6 +79,7 @@ margin-left: 60px;
 font-size: 15px;
 line-height: 24px;
 color: #444;
+word-break: break-all;
 }
 
 .newsTitle a{
@@ -102,7 +103,15 @@ color: #444;
 padding: 20px 0;
 }
 
-
+.newsMoreContent
+{
+	background-color: #F0F0F0;
+	border-radius: 3px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+padding: 8px;
+display: none;
+}
 
 .newsSubtitle
 {

@@ -67,17 +67,7 @@ def get_cached_board_topic(topic_id):
             topic.html_content = urlink(escape(topic.content))  #urlink((mentions(youku(escape(topic.content)) ) ) , trim_url_limit=30)
         else:
             topic.html_content = ''
-        if topic.more_content:
-            topic.html_more_content = br_escape(urlink(escape(topic.more_content)))  #urlink((mentions(youku(escape(topic.content)) ) ) , trim_url_limit=30)
-        else:
-            topic.html_more_content = ''
-        if topic.video_urls:
-            topic.extra_content = ''
-            video_html = '<p></p>'
-            for url in topic.video_urls:
-                video_html += video(url)
-            topic.extra_content = video_html
-        
+
         return topic
     except Exception, error:
         return None
@@ -91,8 +81,34 @@ def fetch_cached_board_topic(topic_id, reflush=False):
         cache.region_invalidate(get_cached_board_topic, None, 'cached_board_topic', topic_id)
 
     return get_cached_board_topic(topic_id)
-    
 
+
+@cache.region('long_term', 'cached_board_topic_morecontent')
+def get_cached_board_topic_morecontent(topic_id):
+    try:
+        topic = fetch_cached_board_topic(topic_id)
+        if topic is None:
+            return None
+        html_more_content = ''
+        if topic.more_content:
+            html_more_content = br_escape(urlink(escape(topic.more_content)))  #urlink((mentions(youku(escape(topic.content)) ) ) , trim_url_limit=30)
+        extra_content = ''
+        if topic.video_urls:
+            
+            video_html = '<p></p>'
+            for url in topic.video_urls:
+                video_html += video(url)
+            extra_content = video_html
+        return html_more_content + extra_content
+    except Exception, error:
+        return None
+    
+    return None
+def fetch_cached_board_topic_morecontent(topic_id, reflush=False):
+    if reflush:
+        cache.region_invalidate(get_cached_board_topic, None, 'cached_board_topic_morecontent', topic_id)
+
+    return get_cached_board_topic_morecontent(topic_id)
 
     
 @cache.region('long_term', 'cached_board_nodelist')

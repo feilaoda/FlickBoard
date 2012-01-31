@@ -18,7 +18,7 @@ from lib.utils import string2int, html_escape
 from lib.time import timeover, timeout
 
 from lib.decorators import authenticated
-from cache.files import fetch_cached_board_topic, fetch_cached_board_nodelist
+from cache.files import fetch_cached_board_topic, fetch_cached_board_topic_morecontent, fetch_cached_board_nodelist
 from app.base.form import BaseForm
 from app.base.validator import Utf8MaxLength
 from app.base.handler import BaseHandler
@@ -51,6 +51,7 @@ class BoardTopicHandler(BaseHandler):
             self.about(404)
         
         topic = fetch_cached_board_topic(topic_id)
+        topic_more_content = fetch_cached_board_topic_morecontent(topic_id)
         if not topic:
             self.about(404)
         node = topic.node
@@ -82,7 +83,8 @@ class BoardTopicHandler(BaseHandler):
             topic_can_edit = True
         
         pagination = Pagination(page, total_pages)
-        self.render("board/topic.html", timeover=timeover,  topic=topic, node=node, node_list=node_list,
+        #return self.write(topic_more_content)
+        self.render("board/topic.html", timeover=timeover,  topic=topic, topic_more_content=topic_more_content, node=node, node_list=node_list,
                    xsrf_token=self.xsrf_token, pagination=pagination, comment_list=comments, topic_has_voted=topic_has_voted, topic_can_edit=topic_can_edit,
                    comment_content_error=comment_content_error, comment_content=comment_content)
 
@@ -367,6 +369,15 @@ class BoardCommentListHandler(BaseHandler):
         else:
             return self.write('')
 
+class BoardApiTopicMoreContentHandler(BaseHandler):
+    def get(self):
+        topic_id = self.get_argument('topic_id', None)
+        if not topic_id:
+            return self.render_json(dict(html=''))
+        html = fetch_cached_board_topic_morecontent(topic_id)
+        return self.render_json(dict(html=html))
+
+
 handlers = [
     (r"/", BoardIndexHandler),
     (r"/board", BoardIndexHandler),
@@ -379,4 +390,7 @@ handlers = [
     (r"/board/topic/([a-zA-Z0-9]*)", BoardTopicHandler),
     (r"/board/comment/([a-zA-Z0-9]*)", BoardCommentHandler),
     (r"/board/node/([a-zA-Z0-9\-_]{3,32})", BoardNodeHandler),
+    
+    (r"/board/api/morecontent", BoardApiTopicMoreContentHandler),
+    
             ]

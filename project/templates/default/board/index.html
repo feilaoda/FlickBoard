@@ -52,6 +52,19 @@ $(function() {
     $(function() { $backToTopFun(); });
 })();
 
+function load_morecontent(topicid)
+{
+	$.get("/board/api/morecontent",
+        {topic_id:topicid},
+        function(data){
+            var more = data['html'];
+            $("#newsMore"+topicid).show().html(more);
+            $("#newsMoreAction"+topicid).hide();
+        },
+        "json");
+}
+
+$("#newsMoreActions").live("click", load_news_more());
 
 </script>
 {% endblock %}
