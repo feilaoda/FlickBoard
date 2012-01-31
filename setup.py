@@ -8,7 +8,7 @@ except ImportError:
     from setuptools import setup, find_packages
 
 setup(
-    name="yihoudu",
+    name="FlickBoard",
     version="0.1",
     install_requires=["pycurl>=7.18.2",
                       "tornado==2.1.1",
@@ -25,6 +25,6 @@ setup(
     packages=find_packages(),
     author="feilaoda",
     author_email="azhenglive@gmail.com",
-    url="http://www.yihoudu.com",
-    description="yihoudu for read",
+    url="http://www.yihoudu.com/board",
+    description="yihoudu for reading later",
 )
