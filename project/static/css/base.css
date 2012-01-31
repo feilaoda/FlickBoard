@@ -50,9 +50,10 @@ font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino San
 p{font-size:14px;font-weight:normal;line-height:22px;margin-bottom:9px;}p small{font-size:12px;color:#AAA;}
 h1 small,h2 small,h3 small,h4 small,h5 small,h6 small{color:#AAA;}
 h3,h4,h5,h6{line-height:24px;}
-h3{font-size:18px;}h3 small{font-size:14px;}
-h4{font-size:16px;}h4 small{font-size:13px;}
-h5{font-size:14px;}h5 small{font-size:12px;}
+h3{font-size:16px;}h3 small{font-size:14px;}
+h4{font-size:15px; }h4 small{font-size:13px;}
+h5{font-size:14px; color: #060;font-weight: normal;
+font: 14px Arial,Helvetica,sans-serif;}h5 small{font-size:12px;}
 h6{font-size:13px;text-transform:uppercase;}
 dl{margin-bottom:18px;}dl dt,dl dd{line-height:22px;}
 dl dt{font-weight:bold;}
@@ -133,7 +134,7 @@ a
 
 
 
-a.highlight{F
+a.highlight, a.hotlight, a.hotlight:link, a.hotlight:active {
 font-size: 13px;
 line-height: 13px;
 background-color: whiteSmoke;
@@ -145,16 +146,18 @@ margin: 3px;
 color: #778087;
 }
 
-a.hotlight, a.hotlight:link, a.count_livid:active {
-line-height: 13px;
-color: white;
+a.highlight:hover,  a.smallBox:hover{
+    text-decoration: none;
+    background-color: #B0B0B0;
+    color: #fff;
+}
 
-background-color: whiteSmoke;
-padding: 3px 10px 3px 8px;
--moz-border-radius: 10px;
--webkit-border-radius: 10px;
-text-decoration: none;
-display: inline-block;
+a.hotlight, a.hotlight:link, a.hotlight:active, a.hotlight:hover {
+font-size: 14px;
+line-height: 15px;
+color: white;
+background-color: #B0B0B0;
+
 }
 
 
@@ -167,17 +170,13 @@ background-color: #EEE;
 display: inline-block;
 }
 
-a.highlight:hover,  a.smallBox:hover{
-    text-decoration: none;
-    background-color: #B0B0B0;
-    color: #fff;
-}
+a.headerLink{ color: white;}
 
 .clickButton , .clickButton:hover {
     font-size: 13px;
     padding: 3px 10px;
     color: #FFF;
-    background-color: #42B6C9;
+    background-color: #4AAC68;
     display: inline-block;
 height: 18px;
 line-height: 18px;
@@ -329,7 +328,7 @@ width: 600px;
 .mainContent
 {
 margin: 0 0 10px 0;
-padding: 20px 30px;
+padding: 20px 20px;
 background-color: #F8F8F8;
 border-radius: 5px;
 -moz-border-radius: 5px;

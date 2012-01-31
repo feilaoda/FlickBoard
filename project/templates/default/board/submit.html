@@ -81,22 +81,24 @@ $("#uploadVideo").hide();
 <div class="clearfix">
 	<textarea cols="70" id="topic_content" class="inputbox" name="topic_content"  rows="8" placeholder="主题内容">{{topic_content|escape}}</textarea>
 	<span class="help-block">
-	最多可以输入300个字 (创建后的新主题无法编辑) <a href="#" onclick="showMoreContent()" class="video" title="视频">+</a>
+	最多可以输入300个字 (创建后的新主题无法编辑) 
 	</span>
-
+<!--
+<a href="#" onclick="showMoreContent()" class="moreContent" title="更多">+</a>
 <div id="moreContent" class="clearfix {% if not topic_more_content  %}displayNone{% endif %}">
 	<textarea cols="70" id="topic_more_content" class="inputbox" name="topic_more_content"  rows="15" placeholder="更多内容 ">{{topic_more_content|escape}}</textarea>
 </div>
 	<span class="help-block">
 	<div class="mediaKind">
 
-<!--
+
 <a href="#" onclick="showUploadImage()" class="picture" title="图片">图片</a>
 
 <a href="#" onclick="showUploadVideo()" class="video" title="视频">视频</a>
--->
+
 	</div>
 	</span>
+-->
 </div>
 
 

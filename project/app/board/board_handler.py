@@ -32,7 +32,7 @@ PageMaxLimit = 10
 
 class BoardTopicForm(BaseForm):
     topic_content = formencode.All(Utf8MaxLength(300), formencode.validators.String(not_empty=True, min=10, strip=True,  messages={'tooLong':u'最多只能输入 %(max)i 个字', 'empty':u'请输入主题内容', 'tooShort':u'请至少输入%(min)i 个字'}))
-    topic_more_content = formencode.All(Utf8MaxLength(3000), formencode.validators.String(strip=True,  messages={'tooLong':u'最多只能输入 %(max)i 个字'}))
+    #topic_more_content = formencode.All(Utf8MaxLength(3000), formencode.validators.String(strip=True, not_empty=False,   messages={'tooLong':u'最多只能输入 %(max)i 个字'}))
     
     #topic_tags = formencode.validators.String(not_empty=False, strip=True, max=200, messages={'tooLong':u'最多只能输入 %(max)i 个字'})
     topic_videos = formencode.validators.URL(strip=True, messages={'noTLD':u'请输入正确的视频地址'})
@@ -79,8 +79,8 @@ class BoardTopicHandler(BaseHandler):
         node_list = fetch_cached_board_nodelist()
         to = timeout(topic.create_time)
         topic_can_edit = False
-        if people and to < 600 and topic.is_author(people):
-            topic_can_edit = True
+        #if people and to < 600 and topic.is_author(people):
+        #    topic_can_edit = True
         
         pagination = Pagination(page, total_pages)
         #return self.write(topic_more_content)

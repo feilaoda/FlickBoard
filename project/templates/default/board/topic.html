@@ -144,14 +144,7 @@ function reply(username){
 
         <span class="newsAuthor"> {{topic.people.username}} </span>
         <span class="offset0"> {{timeover(topic.create_time)}} </span>
-        
-        
-        <span class="offset0">
-		{% if topic.node and topic.node.name %}
-		<a href="/board/node/{{topic.node.name}}" class="gray">{{topic.node.desc}}</a>
-		{% endif %}
-		</span>
-        
+
 {% if topic_can_edit %}
 	    <span>
 		    <a href="/board/edit/{{topic.id}}">编辑</a>

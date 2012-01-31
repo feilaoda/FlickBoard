@@ -28,10 +28,12 @@
 
 {% macro board_node_header_block(node) %}
 <div class="mainContent">
-  <a href="/board" class="highlight">首页</a> <span style="color:#aaa;">/</span>
+<div class="newsHeader">
+  <a href="/board" class="headerLink">首页</a> <span>&nbsp;&nbsp;›&nbsp;&nbsp;</span>
   {% if node and node.name %}
-		<a href="/board/node/{{ node.name }}" class="highlight">{{node.desc}}</a>
+		<a href="/board/node/{{ node.name }}" class="headerLink">{{node.desc}}</a>
   {% endif %}
+</div>
 </div>
 {% endmacro %}
 
