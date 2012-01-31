@@ -1,0 +1,103 @@
+{% extends "templates/site/admin/index.html" %}
+
+{% block content_block %}
+
+<div class="form">
+
+<div class="row buttons">
+		<a href="/admin/edit_app/{{app.id}}"><input type="submit" name="create_submit" value="Edit" />
+		</a>
+</div>
+
+	<p class="note">Fields with <span class="required">*</span> are required.</p>
+
+	<div class="row">
+		<label for="Software_guid">Guid<span class="required">*</span></label>
+		{{app.guid}}
+		</div>
+        <div class="row">
+		<label for="Software_download_url">iTunes Download Url<span class="required">*</span></label>
+		{{app.dl_url}}
+		
+		</div>
+
+	<div class="row">
+
+		<label for="Software_name">Name <span class="required">*</span></label>
+		{{app.name}}
+	</div>
+
+	<div class="row">
+		<label for="Software_description">Description<span class="required">*</span></label>
+                {{app.desc}}
+	</div>
+
+	<div class="row">
+		<label for="Software_version">Version<span class="required">*</span></label>
+		{{app.version}}
+		</div>
+
+	<div class="row">
+		<label for="Software_price">Price<span class="required">*</span></label>
+		{{app.price}}
+		</div>
+
+	<div class="row">
+		<label for="Software_size">Size</label>
+		{{app.size}}
+		</div>
+
+
+	<div class="row">
+		<label for="Software_category">Category<span class="required">*</span></label>
+		{{app.category}}
+			</div>
+	<div class="row">
+		<label for="Software_type">Type<span class="required">*</span></label>
+		{{app.type}}
+		</div>
+
+	<div class="row">
+		<label for="Software_smalllogo_url">Small Logo Url<span class="required">*</span></label>
+		{{app.small_logo}}
+				</div>
+    <div class="row">
+		<label for="Software_logo_url">Logo Url<span class="required">*</span></label>
+		{{app.logo}}
+    </div>
+			
+	
+	<div class="row">
+		<label for="Software_tags">Tags</label>
+{% for tag in app.tags %}
+{{tag}}
+{% endfor %}
+	</div>
+
+	<div class="row">
+		<label for="Software_screenshots">Screenshots</label>
+{% for shot in app.screenshots %}
+{{shot}}
+{% endfor %}
+	</div>
+
+	<div class="row">
+		<label for="Software_create_time">Create Time</label>
+		{{app.create_time}}
+	</div>
+
+	<div class="row">
+		<label for="Software_publish_time">Publish Time</label>
+		{{app.publish_time}}
+	</div>
+
+
+<div class="row buttons">
+		<a href="/admin/edit_app/{{app.id}}"><input type="submit" name="create_submit" value="Edit" />
+		</a>
+</div>
+
+</div>
+
+{% endblock %}
+

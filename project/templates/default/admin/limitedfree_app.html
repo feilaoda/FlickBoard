@@ -1,0 +1,62 @@
+{% extends "templates/site/admin/index.html" %}
+
+
+{% block content_block %}
+<a href="/admin" >
+<span>主页</span>
+</a>
+
+<span>限时免费应用</span>
+	<div id="pageContent">
+	 
+	  
+	<div class="appBlockPage">
+	    <div class="appNewsPage">
+{% for drop_app in drop_apps %}
+	      <div class="appInlineBlock" style="width: 150px; height: 250px; margin: 20px;">
+			<div class="appSnippet" style="width: 100%; ">
+				<div class="appThumbnailWrapper">
+				<a class="appThumbnail" href="/admin/view_app/{{drop_app.app_id}}">
+					<img alt="{{drop_app.app_name}}" src="{{drop_app.app_logo}}">
+				  </a>
+				</div>
+			   
+				<div>
+				<ul>
+					<li>
+						<span><strong>{{drop_app.app_name}}</strong></span>
+					</li>
+					<li>
+						<span>系统要求: {{drop_app.app_type}} </span>
+					</li>
+					<li>
+						<span>推荐指数: {{drop_app.app_opinion}} </span>
+					</li>
+					<li>
+						<a href="/admin/limitedfree_app?id={{drop_app.app_id}}&action=edit" title="{{drop_app.app_name}}" class="title">编辑</a>
+						<a href="javascript:if(confirm('确实要删除吗?'))location='/admin/limitedfree_app?id={{drop_app.app_id}}&action=delete'" title="{{drop_app.app_name}}" class="title">删除</a>
+					</li>
+				</ul>
+				</div>
+				
+			</div>
+	      </div>
+{% endfor %}
+	     
+	    </div>
+	 </div>
+ </div>
+
+{% endblock %}
+
+
+{% block rightbar_block %}
+<form action="/admin/search_app" method="POST">
+<input size="60" maxlength="128" name="app_name" id="Box_title" type="text" >
+ <input type="submit" name="search_submit" value="搜索" class="submitButton">
+</form>
+</div>
+{% endblock %}
+
+
+

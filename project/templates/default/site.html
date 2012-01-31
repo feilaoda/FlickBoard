@@ -1,0 +1,90 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="language" content="zh_CN" />
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/base.css" />
+	<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+	
+
+	{% block title %} <title>{{settings.sitetitle}}</title>{% endblock %}
+	
+    
+	{% block script_block %} {% endblock %}
+
+
+
+</head>
+
+<body class="home">
+<div class="colorBar"> 
+
+<div class="topbar">
+ 
+<div class="top">
+
+          <h1 class="pageLogo"><a title="首页" href="/">{{settings.sitename}}</a></h1><span class="logoSubtitle">{{settings.sub_sitename}}</span>
+		
+		  
+		  <ul class="navigation">
+			
+			
+{% if current_user %}
+	<li id="navHome"><a href="/" accesskey="1">首页</a></li>
+<li id="navAccount">
+		<a href="/settings" >设置</a>
+	</li>
+	<li id="navAccount">
+		<a href="/logout" id="navAccountLink">退出 ({{current_user.username}})</a>
+	</li>
+{% else %}
+    <li id="navHome"><a href="/" accesskey="1">首页</a></li>
+
+    <li><a href="/login" accesskey="2">登录</a></li>
+    <li><a href="/signup" accesskey="3">注册</a></li>
+{% endif %}  
+          </ul>
+        </div>
+
+
+</div>
+
+</div>
+
+
+<div class="container">
+	
+{% block body_block %}	
+		 
+	<div class="content" >
+		<div class="pageContent">
+			{% block content_block %} {% endblock %}
+		</div>
+
+	
+	
+		<div class="rightBar">
+			{% block rightbar_block %} {% endblock %}
+			
+			{% block plusbar_block %} {% endblock %}
+		</div>
+	</div>
+	
+{% endblock %}
+  
+</div><!-- container -->
+
+
+<div class="footer">            
+	<span class="lfloat">&copy; 2011 
+	<a href="http://{{settings.options.host_url}}">{{settings.sitename}}</a>  All rights reserved.</span>
+	<span class="rfloat"><a href="/about">{{_("关于")}}</a> · <a href="mailto:{{settings.options.admin_email}}">{{_("联系我们")}}</a></span>    
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+{% extends "site.html" %}
+{% import 'pagelet/sidebar_nav_tpl.html' as nav %}
+
+
+{% block script_block %}
+
+    <script>
+    
+    
+    function editProfile(node) {
+      
+        $('#profiletip').text('提交中……');
+        $('#profiletip').fadeIn("slow");  
+        
+        $.ajax({
+            type: 'POST',
+            url: '/settings/editprofile',    
+            data: {'login_email': $('#login_email').val()},
+            success: function(json){
+            $('#profiletip').text(json.info);
+            
+                    if(json.result == 'ok'){
+                    }
+            else if(json.result == 'redirect')
+            {
+                $(location).attr('href',json.url);
+            }
+            }
+        });
+        
+    }
+    
+    function editPassword(node) {
+      
+        $('#passwordtip').text('提交中……');
+        $('#passwordtip').fadeIn("slow");  
+        
+        $.ajax({
+            type: 'POST',
+            url: '/settings/editpassword',    
+            data: {'oldpwd': $('#oldpwd').val(),'newpwd': $('#newpwd').val()},
+            success: function(json){
+                        $('#passwordtip').text(json.info);
+            
+                    if(json.result == 'ok'){
+                        $('#oldpwd').val('');
+                        $('#newpwd').val('');
+                    }
+                        else if(json.result == 'redirect')
+                        {
+                            $(location).attr('href',json.url);
+                        }
+            }
+        });
+        
+    }
+    
+    
+    function editAvatar(node)
+    {
+        $('#uploadAvatar').fadeIn("slow");
+    }
+    
+    
+    function checkUploadAvatar(f){
+        if(f.people_avatar_file.value==''){
+            alert('请选择上传的头像文件！');f.people_avatar_file.focus();return false;
+        }
+    }
+    </script>
+
+
+{% endblock %}
+
+
+
+{% block content_block %}
+<div class="mainContent">
+<div class="profile">
+        <span class="greyt">修改资料</span>
+            <hr class="clear">
+        <div id="avatartip" class="errorInfo"></div>
+        <div class="boxCell">
+    			<table cellpadding="5" cellspacing="0" border="0">
+    			    <tbody><tr>
+    			        <td width="80" align="right">
+    			            当前的头像
+    			        </td>
+    			        <td width="200" align="left">
+											<img src="{{people.avatar_url}}" border="0">&nbsp; 
+					     </td>
+    			    </tr><tr>
+    			        <td width="80" align="right">
+    			            <a href="/settings/avatar">编辑头像</a>
+    			        </td>
+    			        <td width="200" align="left">
+
+					     </td>
+    			    </tr>
+    			</tbody>
+                </table>
+</div>
+
+        
+    
+            <hr class="clear">
+        <div id="profiletip" class="errorInfo"></div>
+        <p>
+            <label for="login_email">邮&nbsp;&nbsp;&nbsp;箱</label>
+            <input type="text" name="login_email" id="login_email" value="{{people.email}}" class="medium">
+            </p>
+        <p><input type="submit" value="更改邮箱" id="editProfile" class="submitButton" onclick="editProfile(this)"></p>
+            
+        
+        <hr class="clear">
+             <div id="passwordtip" class="errorInfo"></div>
+
+            <p>
+            <label for="password">旧密码</label>
+            <input type="password" name="oldpwd" id="oldpwd" value="" class="medium">
+            </p>
+            <p>
+            <label for="password">新密码</label>
+            <input type="password" name="newpwd" id="newpwd" value="" class="medium">
+            </p>
+            <p><input type="submit" value="更改密码" id="editPassword" class="submitButton" onclick="editPassword(this)">
+        </p>
+            </div>
+ </div>
+{% endblock %}
+
+
+
+
+
+

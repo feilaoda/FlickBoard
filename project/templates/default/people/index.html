@@ -1,0 +1,8 @@
+{% extends "templates/site/site.html" %}
+
+{% import 'templates/site/pagelet/page_leftbar_nav_tpl.html' as nav %}
+
+{% block leftbar_block %}
+    {{ nav.leftbar('member')}}
+{% endblock %}
+

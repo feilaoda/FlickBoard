@@ -1,0 +1,61 @@
+{% extends "templates/site/admin/index.html" %}
+
+{% block content_block %}
+
+{% if app_store %}
+	<div class="appBlockPage">
+	    <div class="appNewsPage">
+{% for app in app_store %}
+	      <div class="appInlineBlock">
+		  <div class="appSnippet" style="height:150px;">
+		      <div class="appThumbnailWrapper">
+			  <a class="appThumbnail" href="/admin/view_app/{{app.getid()}}">
+                            
+			      <img alt="{{app.name}}" src="{{app.small_logo}}">
+                            
+                              
+                          </a>
+			  </div>
+		     
+		      <div class="appDetails">
+				<span>
+			  <a href="/market/detail/{{app.getid()}}" title="{{app.name}}" class="title">{{app.name}}</a>
+			  
+			  </span>
+		      </div>
+		  
+		  <div class="appDetails">
+				<span>
+			 
+			   <a href="/admin/edit_app/{{app.getid()}}" title="{{app.name}}" class="title">编辑</a>
+			  <a href="/admin/limitedfree_app?id={{app.getid()}}&action=add" title="{{app.name}}" class="title">添加限免</a>
+			  </span>
+			
+		      </div>
+		
+		      
+		  </div>
+	      </div>
+{% endfor %}
+	     
+	    </div>
+	 </div>
+{% endif %}
+
+
+{% endblock %}
+
+
+
+{% block rightbar_block %}
+
+<form action="/admin/search_app" method="POST">
+<input size="60" maxlength="128" name="app_name" id="Box_title" type="text" >
+ <input type="submit" name="search_submit" value="搜索" class="submitButton">
+</form>
+</div>
+
+
+{% endblock %}
+
+

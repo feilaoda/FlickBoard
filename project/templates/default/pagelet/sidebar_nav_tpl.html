@@ -1,0 +1,43 @@
+
+
+{% macro boardbar(item='home') %}
+{% endmacro %}
+
+{% macro boardbar_todo(item='home') %}
+
+<div class="pagelet">
+        <div id="sideBarMenu">
+              <ul>
+                
+                <li class="navSide">
+                <a href="/board/node/securet" class="item {% if item == 'group' %} active {% endif %}">
+                        <span class="imgWrap">小秘密</span>
+                </a>
+                </li>
+                
+                <li class="navSide">
+                <a href="/board/node/story" class="item {% if item == 'group' %} active {% endif %}">
+                        <span class="imgWrap">微小说</span>
+                </a>
+                </li>
+                
+                <li class="navSide">
+                <a href="/board/node/hot" class="item {% if item == 'group' %} active {% endif %}">
+                        <span class="imgWrap">微热门</span>
+                </a>
+                </li>
+                
+                <li class="navSide">
+                <a href="/board/node/sweet" class="item {% if item == 'group' %} active {% endif %}">
+                        <span class="imgWrap">甜言蜜语</span>
+                </a>
+                </li>
+                
+                </ul>
+        </div>
+</div>      
+        
+{% endmacro %}
+
+
+

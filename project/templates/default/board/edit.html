@@ -1,0 +1,100 @@
+{% extends "templates/site/hackerboard/index.html" %}
+
+{% import 'templates/site/hackerboard/hackerboard_tpl.html' as tpl %}
+
+
+
+
+
+{% block rightbar_block %}
+
+	{{ super() }}
+	{{ tpl.hackerboard_node_help_block(node) }}
+
+{% endblock %}
+
+
+
+
+{% block hackerboard_content_block %}
+
+
+<div class="newsContent">
+<form action="/board/edit/{{topic.id}}" method="POST">
+
+<div class="clearfix"></div>
+
+{% if topic_title_error %}
+<div class="clearfix">
+<span class="error">标题: {{topic_title_error}}</span>
+<br/>
+</div>
+{% endif %}
+<div class="clearfix">
+	<label>标题: </label>
+<div class="input">
+
+ <input class="xxxxlarge" type="text" id="topic_title" name="topic_title" value="{{topic_title}}" /><br />
+  <span class="help-block">
+	最多可以输入100个字
+	</span>
+</div>
+ 
+</div>
+{% if topic_content_error %}
+<div class="clearfix">
+<span class="error">内容: {{topic_content_error}}</span>
+</div>
+{% endif %}
+<div class="clearfix">
+	<label>内容: </label>
+	<div class="input">
+	
+	<textarea cols="70" id="topic_content" class="inputbox" name="topic_content"  rows="8">{{topic_content}}</textarea>
+	<span class="help-block">
+		(内容可以为空)
+	</span>
+	<span class="help-block">
+		最大输入500个字 (创建新主题后5分钟内，可以进行编辑)
+	</span>
+	</div>
+
+</div>
+
+<!--
+<div class="uploadVideo">
+    
+    <a href="#" class="txt" title="添加视频播放页地址, 优酷、土豆、56可直接播放" tabindex="3">视频</a>
+    <div class="videoLoadWrap" style="display: none; ">
+        <form name="videoUpload" id="videoUpload" class="videoUpload" method="get">
+            <a href="#" class="close" title="关闭">关闭</a>
+            <p>粘帖视频播放页地址<br>
+            <span>(优酷、土豆、凤凰视频、56等网站视频可直接播放)</span></p>
+            <p class="clearfix">
+            <input type="text" class="inputUrl"><input type="submit" class="btn" value="确定"></p>
+        </form>
+        <p class="errorInfo" style="display: block; ">暂不支持此视频地址，<a href="#" class="vNormalBtn">将作为普通链接显示</a></p>
+      
+    </div>
+</div>
+-->
+
+<div class="clearfix">
+<div class="input">
+	<input autocomplete="off" class="xxxxlarge" id="topic_tags" name="topic_tags" placeholder="标签：例如 (动作 赛车)，最多 5 个" size="30" type="text">
+	<span class="help-block">
+	(标签用于标注主题内容的分类, 可以为空)
+	</span>
+</div>
+</div>
+
+<div class="clearfix">
+	<div class="input">
+    <input type="submit" name="topic_submit" value="提交" class="submitButton">
+</div>
+</div>
+</form>
+</div>
+
+
+{% endblock %}

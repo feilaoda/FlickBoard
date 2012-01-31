@@ -1,0 +1,29 @@
+{% extends "site.html" %}
+
+{% block rightbar_block %}
+
+<div class="sideBar">
+<div class="pagelet">
+        <div id="sideBarMenu">
+              <ul>
+                
+                <li class="navSide">
+                <a href="/admin/board/node" class="item {% if item == 'group' %} active {% endif %}">
+                        <span class="imgWrap">节点管理</span>
+                </a>
+                </li>
+                
+                <li class="navSide">
+                <a href="/admin/board/topic" class="item {% if item == 'group' %} active {% endif %}">
+                        <span class="imgWrap">主题管理</span>
+                </a>
+                </li>
+                
+               
+                
+                </ul>
+        </div>
+</div>      
+    </div>  
+
+{% endblock %}

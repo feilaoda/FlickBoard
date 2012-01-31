@@ -1,0 +1,27 @@
+{% extends "templates/site/admin/index.html" %}
+
+
+{% block script_block %}
+<link rel="stylesheet" type="text/css" href="/static/css/admin.css">
+{% endblock %}
+
+{% block content_block %}
+
+{% for m in member_list %}
+{% set role = m.get_role() %}
+{% if role %}
+{% set role_persission = role.permission %}
+{% else %}
+{% set role_persission = 'Unknown' %}
+{% endif %}
+
+<div class="clearfix role_{{role_persission}}">
+{{m.username}}<span class="required">* ( {{role_persission}} )</span>
+<span>
+<a href="/admin/edit_member?id={{m.id}}&action=role">授权</a>
+</span>
+</div>
+{% endfor %}
+
+
+{% endblock %}

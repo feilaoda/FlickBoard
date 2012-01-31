@@ -1,0 +1,79 @@
+{% extends "site.html" %}
+{% import 'pagelet/sidebar_nav_tpl.html' as nav %}
+
+
+{% block script_block %}
+
+    <script>
+
+
+    function checkUploadAvatar(f){
+        if(f.people_avatar_file.value==''){
+            alert('请选择上传的头像文件！');f.people_avatar_file.focus();return false;
+        }
+    }
+    </script>
+
+
+{% endblock %}
+
+
+
+
+{% block content_block %}
+<div class="mainContent">
+  <a href="/board" class="highlight">首页</a> <span style="color:#aaa;">/</span>
+
+		<a href="/settings" class="highlight">设置</a>
+  
+</div>
+
+<div class="mainContent">
+<div class="profile">
+     
+        <div id="avatartip" class="errorInfo"></div>
+<div class="boxCell">
+    			<table cellpadding="5" cellspacing="0" border="0">
+    			    <tbody><tr>
+    			        <td width="80" align="right">
+    			            当前的头像
+    			        </td>
+    			        <td width="200" align="left">
+											<img src="{{people.avatar_url}}" border="0">&nbsp; 
+					     </td>
+    			    </tr>
+    			</tbody></table>
+</div>
+<div class="boxInner">
+<form enctype="multipart/form-data" action="/settings/avatar" method="post">
+                    <h4> <small>支持 2MB 以内的 PNG / GIF / JPG 图片文件作为头像，推荐使用正方形的透明 PNG 图片以获得最佳效果。
+        			</small></h4>
+        			<table cellpadding="5" cellspacing="0" border="0">
+        			    <tbody><tr>
+        			        <td width="80" align="right">
+        			            选择图片文件
+        			        </td>
+        			        <td width="200" align="left">
+        			            <input type="file" name="avatar">
+        			        </td>
+        			    </tr>
+        			    <tr>
+        			        <td width="80" align="right">
+        			        </td>
+        			        <td width="200" align="left">
+                                {{ xsrf_form_html() }}
+        			            <input type="submit" value="上传头像" class="submitButton">
+        			        </td>
+        			    </tr>
+        			</tbody></table>
+        			</form>
+</div>
+</div>
+</div>
+{% endblock %}
+
+
+
+
+
+

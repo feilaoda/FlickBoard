@@ -1,0 +1,84 @@
+{% extends "site.html" %}
+
+{% block script_block %}
+<script type="text/javascript" src="/static/js/md5.js"></script>
+{% endblock %}
+
+
+{% block body_block %}
+<div id="mainContent">
+<div class="signupContainer">
+<div class="clear">
+    </div>
+
+<form action="/signup" method="POST" onsubmit="md5hash2(login_password, login_md5password, login_password_two, login_md5password_two)">
+
+<div>
+{% if login_code_error %}
+<span class="errorInfo">邀请码: {{login_code_error}}</span><br/>
+{% endif %}
+{% if login_name_error %}
+<span class="errorInfo">帐&nbsp;&nbsp;&nbsp;号: {{login_name_error}}</span><br/>
+{% endif %}
+{% if login_email_error %}
+<span class="errorInfo">邮&nbsp;&nbsp;&nbsp;箱: {{login_email_error}}</span><br/>
+{% endif %}
+{% if login_password_error %}
+<span class="errorInfo">密&nbsp;&nbsp;&nbsp;码: {{login_password_error}}</span><br/>
+{% endif %}
+</div>
+
+   <div class="clearfix">
+   <label for="xlInput">帐&nbsp;&nbsp;&nbsp;号:</label>
+   <div class="input">
+             
+                <input class="large" type="text" id="login_name" name="login_name" value="{{login_name}}" class="smallinput"/>
+        <span class="help-block">(3-15个字符长度的中文/字母/数字，请勿使用特殊字符)</span>
+    </div>
+   </div>
+   
+    <div class="clearfix">
+    <label for="xlInput">邮&nbsp;&nbsp;&nbsp;箱:</label>
+    <div class="input">
+              
+                 <input class="large" type="text" id="login_email" name="login_email" value="{{login_email}}" class="smallinput"/>
+                  <span class="help-block">(支持Gravatar头像,可以通过此邮箱找回密码)</span>
+         
+    </div>
+    </div>
+    
+    <div class="clearfix">
+    <label for="xlInput">密&nbsp;&nbsp;&nbsp;码:</label>
+    <div class="input">
+              <input class="large" type="password" id="login_password" name="login_password" value="" class="smallinput"/>
+            <span class="help-block">(请输入至少4个字符的密码)</span>
+         <input type="hidden" name="login_md5password">
+            <input type="hidden" name="login_md5password_two">
+    </div>
+    </div>
+    
+    <div class="clearfix">
+    <label for="xlInput">重复密码:</label>
+    <div class="input">
+                 <input class="large" type="password" id="login_passwordtwo" name="login_passwordtwo" value="" class="smallinput"/><br />
+         
+    </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="clearfix">
+        <label for="xlInput"></label>
+        <div class="input">
+            <input class="submitButton" type="submit" id="submit" name="signup_submit" value="注册" />
+        </div>
+    </div>
+
+    {{ xsrf_form_html() }}
+
+</form>
+
+
+</div>
+</div>
+
+{% endblock %}

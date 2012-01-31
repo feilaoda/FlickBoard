@@ -1,0 +1,142 @@
+{% extends "site.html" %}
+
+{% import 'board/board_tpl.html' as tpl %}
+{% import 'pagelet/sidebar_nav_tpl.html' as nav %}
+
+
+
+
+{% block javascript_block %}
+
+<script type="text/javascript">
+
+function showUploadImage() {
+$("#uploadImage").show();
+}
+function showUploadVideo() {
+$("#uploadVideo").show();
+}
+function showMoreContent() {
+$("#moreContent").show();
+}
+
+
+function closeUploadImage() {
+$("#uploadImage").hide();
+}
+function closeUploadVideo() {
+$("#uploadVideo").hide();
+}
+
+</script>
+
+{% endblock %}
+
+
+
+{% block rightbar_block %}
+
+
+<div class="sideBar">
+	{{ nav.boardbar('board')}}
+</div>
+{% endblock %}
+
+
+
+
+{% block content_block %}
+
+{{ tpl.board_node_header_block(node) }}
+
+<div class="mainContent">
+<form action="/board/submit/{{node.name}}" method="POST">
+
+<div class="clearfix"></div>
+
+{% if topic_title_error %}
+<div class="clearfix">
+	<span class="errorInfo">{{topic_title_error}}</span>
+</div>
+{% endif %}
+
+
+{% if topic_content_error %}
+<div class="clearfix">
+	<span class="errorInfo">内容: {{topic_content_error}}</span>
+</div>
+{% endif %}
+
+{% if topic_more_content_error %}
+<div class="clearfix">
+	<span class="errorInfo">更多内容: {{topic_more_content_error}}</span>
+</div>
+{% endif %}
+{% if topic_videos_error %}
+<div class="clearfix">
+	<span class="errorInfo">视频: {{topic_videos_error}}</span>
+</div>
+{% endif %}
+
+<div class="clearfix">
+	<textarea cols="70" id="topic_content" class="inputbox" name="topic_content"  rows="8" placeholder="主题内容">{{topic_content|escape}}</textarea>
+	<span class="help-block">
+	最多可以输入300个字 (创建后的新主题无法编辑) <a href="#" onclick="showMoreContent()" class="video" title="视频">+</a>
+	</span>
+
+<div id="moreContent" class="clearfix {% if not topic_more_content  %}displayNone{% endif %}">
+	<textarea cols="70" id="topic_more_content" class="inputbox" name="topic_more_content"  rows="15" placeholder="更多内容 ">{{topic_more_content|escape}}</textarea>
+</div>
+	<span class="help-block">
+	<div class="mediaKind">
+
+<!--
+<a href="#" onclick="showUploadImage()" class="picture" title="图片">图片</a>
+
+<a href="#" onclick="showUploadVideo()" class="video" title="视频">视频</a>
+-->
+	</div>
+	</span>
+</div>
+
+
+
+<div id="uploadImage" class="clearfix displayNone">
+    <div  class="">
+            <a href="#" onclick="closeUploadImage()" class="rfloat" id="closeUploadImage" title="关闭">x</a>
+            <p>图片地址:</p>
+            <input type="text" class="xxxxlarge" id="topic_images" name="topic_images" placeholder="图片地址">
+    </div>
+</div>
+
+<div id="uploadVideo" class="createVideo clearfix displayNone">
+    <div  class="">
+            
+            <p>视频地址: <a href="#" onclick="closeUploadVideo()" title="关闭">X</a></p>
+            <input type="text" class="xxxxlarge" id="topic_videos" name="topic_videos" placeholder="优酷、土豆、56等网站视频可直接播放">
+    </div>
+</div>
+
+
+<!--
+<div class="clearfix">
+	<input autocomplete="off" class="xxxxlarge" id="topic_tags" name="topic_tags" placeholder="标签：例如 (心情 工作)，最多5个，可以为空 " size="30" type="text" value="{{topic_tags}}">
+	<span class="help-block">
+	(使用空格分隔)
+	</span>
+</div>
+-->
+
+
+
+<div class="clearfix">
+   <input type="submit" name="topic_submit" value="提交" class="submitButton">
+</div>
+{{ xsrf_form_html() }}
+</form>
+</div>
+
+
+
+{% endblock %}
+

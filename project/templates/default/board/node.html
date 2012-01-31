@@ -1,0 +1,65 @@
+{% extends "board/index.html" %}
+
+{% import 'pagelet/sidebar_nav_tpl.html' as nav %}
+{% import 'board/board_tpl.html' as tpl %}
+
+
+{% block rightbar_block %}
+<div class="sideBar">
+	{{ tpl.board_node_create_block(node) }}
+</div>
+
+<div class="sideBar">
+	{{ nav.boardbar('board')}}
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+{% block content_block %}
+{{ tpl.board_node_header_block(node) }}
+{{ tpl.board_content_block(topic_list, timeover) }}
+
+			<div class="rfloat">
+			{% if pagination.total_pages > 1 %}
+				{% if node %}
+					{% if pagination.curr_page > 2 %}
+					<span style="padding-left:20px;"><a href="/board/node/{{node.name}}?oldpage={{pagination.curr_page}}&page={{pagination.curr_page-1}}" class="clickButton">上一页</a></span>
+					{% elif pagination.curr_page == 2 %}
+					<span style="padding-left:20px;"><a href="/board/node/{{node.name}}" class="clickButton">上一页</a></span>
+					{% endif %}
+					<span style="padding-left:20px;"><a href="/board/node/{{node.name}}?oldpage={{pagination.curr_page}}&page={{pagination.curr_page+1}}" class="clickButton">下一页</a></span>
+				{% endif %}
+			{% endif %}
+			</div>
+
+{% endblock %}
+    
+
+
+
+
+
+
+{% macro rightbar_node_block() %}
+<div class="rightBarBox">
+    <div class="boxTitle">
+    <h5>热门话题</h5>
+    </div>
+    <div class="boxInner" align="left">
+		{% if node_list %}
+			{% for n in node_list %}
+			<a href="/board/{{n.name}}" class="highlight">{{n.desc}}</a>  
+			{% endfor %}
+		{% endif %}
+    </div>
+</div>
+{% endmacro %}

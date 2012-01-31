@@ -1,0 +1,236 @@
+{% extends "board/index.html" %}
+
+{% import 'pagelet/sidebar_nav_tpl.html' as nav %}
+{% import 'pagelet/pagination_tpl.html' as page %}
+{% import 'board/board_tpl.html' as tpl %}
+
+
+
+
+
+
+{% block rightbar_block %}
+  <div class="sideBar">
+	  {{ tpl.board_node_create_block(node) }}
+  </div>
+  
+  <div class="sideBar">
+	  {{ nav.boardbar('board')}}
+  </div>
+{% endblock %}
+
+
+{% block javascript_block %}
+
+<script type="text/javascript" src="/static/js/jquery.history.js"></script>
+<script  type="text/javascript" >
+
+
+function byId(id) {
+  return document.getElementById(id);
+}
+ 
+function vote(node, where) {
+  var v = node.id.split(/_/);   // {'voteup', '123'}
+  var item = v[1]; 
+
+  byId('voteup_'   + item).style.visibility = 'hidden';
+ 
+  $.ajax({url: "/board/vote",
+         type: "POST",
+         data: "id="+item+"&dir=up&where="+where+"&_xsrf={{xsrf_token}}",
+        dataType: "json",
+        success: function (json)
+        {
+            
+            if(json.result == 'ok')
+            {
+                $('#score_'+item).html(json.vote);
+            }
+            else if(json.result == 'redirect')
+            { 
+                $(location).attr('href',json.url);
+            }
+        },
+        
+        error: function(status)
+        {
+        }
+  });
+}
+  
+function reply(username){
+    comment_content = $("#id_comment_content");
+    old_content = comment_content.val();
+
+    prefix = "@" + username + " ";
+    new_content = ''
+    if(old_content.length > 0){
+        if (old_content != prefix) {
+            new_content = prefix + old_content;
+        }
+    } else {
+        new_content = prefix
+    }
+    comment_content.focus();
+    comment_content.val(new_content);
+}
+
+
+
+</script>
+
+{% endblock %}
+
+
+
+
+
+
+
+{% block content_block %}
+  
+{{ tpl.board_node_header_block(node) }}
+
+
+    <div class="mainContent">
+		{% if topic %}
+			{{board_topic_content_block(topic)}}
+            <div class="navSeparator"></div>
+            {{board_topic_comment_block(topic, comment_list)}}
+		{% endif %}
+    </div>
+
+{% endblock %}
+
+
+
+
+
+{% macro board_topic_content_block(topic) %}
+
+
+
+<div class="newsDetail">
+
+    <div >
+	  <dl>
+		<dt class="avatar">
+<a href="/people/{{topic.people.username}}"><img src="{{topic.people.avatar_url}}"></a>
+</dt>
+		
+		<dd class="newsTitle">
+		  {% if topic.title %}
+<h5>{{topic.title}}</h5>
+{% endif %}
+	{{topic.html_content}}
+{% if topic.media_content %}
+{{topic.media_content}}
+{% endif %}
+<br/><br/>
+{% if topic.more_content %}
+{{topic.html_more_content}}
+{% endif %}
+		  
+		    <div class="newsSubtitle">
+<!--
+{% if not topic_has_voted %}  
+        <span class="lfloat">
+        <a id="voteup_{{topic.id}}" onclick="vote(this, 'item')" href="#vote">
+         <span id="score_{{topic.id}}" class="newsArrowup lfloat"></span>
+        </a>
+        </span>
+{% endif %}
+        <span>{{topic.up_vote}}赞</span>
+-->
+
+        <span class="newsAuthor"> {{topic.people.username}} </span>
+        <span class="offset0"> {{timeover(topic.create_time)}} </span>
+        
+        
+        <span class="offset0">
+		{% if topic.node and topic.node.name %}
+		<a href="/board/node/{{topic.node.name}}" class="gray">{{topic.node.desc}}</a>
+		{% endif %}
+		</span>
+        
+{% if topic_can_edit %}
+	    <span>
+		    <a href="/board/edit/{{topic.id}}">编辑</a>
+	    </span>
+{% endif %}
+            
+    </div>
+		</dd>
+		
+	  </dl>
+
+</div> 
+   
+
+
+</div>
+
+{% endmacro %}
+
+
+
+
+{% macro board_topic_comment_block(topic, comment_list) %}
+
+<div class="mainComment" id="comments" >
+    <div class="clear"></div>
+ 
+{% if topic.comment_count>0 %}
+    <div >
+        <span>共 {{topic.comment_count}} 条评论</span>
+        <ul id="commentList">
+        {{tpl.comment_list_ajax_block(comment_list,timeover)}}
+        </ul>
+        {{ page.render_pagination("/board/topic/%s" % topic.id, pagination) }}
+        <div class="clear"></div>
+    </div>
+
+{% endif %}
+    
+{%if current_user %}
+
+
+<div><span>评论</span></div>
+{% if comment_content_error %}
+    <span class="errorInfo">{{comment_content_error}}</span>
+    <br>
+{% endif %}
+    <div>
+        <form action="/board/comment/{{topic.id}}#comments" method="POST">
+            <p>
+            <input type="hidden" id="id_topic" name="topic_id" value="{{topic.id}}">
+            <input type="hidden" id="id_topic_url" name="topic_url" value="/board/topic/{{topic.id}}">
+            <textarea style="height:100px; width:98%;" name="comment_content" id="id_comment_content" cols="40" class="inputbox">{{comment_content|escape}}</textarea>
+            <div>
+			<span class="help-block">最多可以输入300个字</span>
+			
+			<span class="help-block">请认真考虑自己的回复, 这里不欢迎无意义的内容“顶”，“沙发”，等等。</span>
+			</div>
+			</p>
+            <p class="rfloat">
+            <input id="id_comment_submit" type="submit" value=" 发表回复 " name="comment_submit" class="submitButton">
+            </p>
+            {{ xsrf_form_html() }}
+        </form>
+    </div>
+{% else %}
+    <div><span class="lfloat">登入后发表评论，现在 <a href="/login">登入</a> 或 <a href="/signup">注册</a>
+    </span>
+    </div>
+{% endif %}
+    
+</div>
+
+
+{% endmacro %}
+
+
+
+
+

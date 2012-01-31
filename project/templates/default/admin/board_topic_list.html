@@ -1,0 +1,58 @@
+{% extends "admin/index.html" %}
+
+
+{% block plusbar_block %}
+
+<div class="sideBar">
+<div class="pagelet">
+
+
+    <div class="boxTitle">
+    <h5>所有节点</h5>
+    </div>
+    <div class="boxInner" align="left">
+		<a href="/admin/board/topic" class="highlight">所有节点</a>
+		{% if node_list %}
+			{% for n in node_list %}
+			<a href="/admin/board/topic?action=list&node={{n.name}}" class="highlight">{{n.desc}}</a>  
+			{% endfor %}
+		{% endif %}
+    </div>
+</div>
+</div>
+
+{% endblock %}
+
+
+{% block content_block %}
+<a href="/admin" >
+<span>主页</span>
+</a>
+
+
+
+    
+<div class="mainContent">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody>
+{% for topic in topic_list %}
+<tr bgcolor="#ddd">
+	<td><a href="javascript:if(confirm('确实要删除吗? 千万小心操作'))location='/admin/board/topic?action=delete&topic_id={{topic.id}}'">删除</a></td>
+	<td><a href="/admin/board/topic?action=edit&topic_id={{topic.id}}">编辑</a></td>
+	<td>{{topic.id}}</td>
+	<td>{{topic.people.username}}</td>
+	
+</tr>
+<tr>
+
+	<td colspan=3>{{topic.content|escape|urlize}}</td>
+</tr>
+{% endfor %}
+</table>
+
+</div>
+
+
+{% endblock %}
+
+

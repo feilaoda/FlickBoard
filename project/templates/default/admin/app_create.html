@@ -1,0 +1,103 @@
+<%inherit file="../site.html" />
+
+<%def name="header_script()">
+
+<script src="/static/js/jquery.min.js" type="text/javascript" ></script>
+
+<link rel="stylesheet" type="text/css" href="/css/jquery.cleditor.css" />
+<script type="text/javascript" src="/js/jquery.cleditor.min.js"></script>
+
+<script type="text/javascript">
+/*<![CDATA[*/
+jQuery(function($) {
+			$('#Software_description').cleditor({'width':800,'height':300,'useCSS':true});
+});
+/*>*/
+</script>
+
+</%def>
+
+<a href="/admin" >
+<span>主页</span>
+</a>
+
+<div class="form">
+
+<form id="software-form" action="/admin/create_app" method="post">
+	<p class="note">Fields with <span class="required">*</span> are required.</p>
+
+	
+	<div class="row">
+		<label for="Software_guid">Guid<span class="required">*</span></label>
+		<input size="60" maxlength="128" name="app_guid" id="Software_guid" type="text" value="" />			</div>
+        <div class="row">
+		<label for="Software_download_url">iTunes Download Url<span class="required">*</span></label>
+		<input size="100" maxlength="255" name="app_download_url" id="Software_download_url" type="text" value="" />			</div>
+
+
+
+	<div class="row">
+
+		<label for="Software_name">Name <span class="required">*</span></label>		<input size="60" maxlength="255" name="app_name" id="Software_name" type="text" value="" />			</div>
+
+	<div class="row">
+		<label for="Software_description">Description<span class="required">*</span></label>
+                
+                <textarea name="app_description" id="Software_description" style="width: 800px; height: 273px;"></textarea>
+	</div>
+
+	<div class="row">
+		<label for="Software_version">Version<span class="required">*</span></label>
+		<input size="32" maxlength="32" name="app_version" id="Software_version" type="text" value="" />			</div>
+
+	<div class="row">
+		<label for="Software_price">Price<span class="required">*</span></label>
+		<input size="10" maxlength="10" name="app_price" id="Software_price" type="text" value="" />			</div>
+
+	<div class="row">
+		<label for="Software_size">Size</label>
+		<input size="10" maxlength="10" name="app_size" id="Software_size" type="text" value="" />			</div>
+
+
+	<div class="row">
+		<label for="Software_category">Category<span class="required">*</span></label>
+		<input size="32" maxlength="32" name="app_category" id="Software_category" type="text" value="" />			</div>
+
+	<div class="row">
+		<label for="Software_type">Type<span class="required">*</span></label>
+		<input name="app_type" id="Software_type" type="text" value="" />			</div>
+
+	<div class="row">
+		<label for="Software_smalllogo_url">Small Logo Url<span class="required">*</span></label>
+		<input size="60" maxlength="255" name="app_smalllogo_url" id="Software_smalllogo_url" type="text" value="" />			</div>
+			
+    <div class="row">
+		<label for="Software_logo_url">Logo Url<span class="required">*</span></label>
+		<input size="60" maxlength="255" name="app_logo_url" id="Software_logo_url" type="text" value="" />			</div>
+			
+	
+	<div class="row">
+		<label for="Software_tags">Tags</label>
+		<textarea rows="6" cols="50" name="app_tags" id="Software_tags"></textarea>			</div>
+
+	<div class="row">
+		<label for="Software_screenshots">Screenshot</label>
+		<textarea rows="6" cols="50" name="app_screenshots" id="Software_screenshots"></textarea>			</div>
+
+	<div class="row">
+		<label for="Software_create_time">Create Time</label>
+		<input name="app_create_time" id="Software_create_time" type="text" value="" />			</div>
+
+	<div class="row">
+		<label for="Software_publish_time">Publish Time</label>
+		<input name="app_publish_time" id="Software_publish_time" type="text" value="" />			</div>
+
+
+	<div class="row buttons">
+		<input type="submit" name="create_submit" value="Create" />	</div>
+
+</form>
+</div>
+
+
+

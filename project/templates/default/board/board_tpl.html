@@ -1,0 +1,185 @@
+
+<%def name="board_search_block()">
+	    <div class="box">
+	    <div class="newsCreate">
+		    <a href="/board/search" class="clickButton">搜索</a>
+	    </div>
+	    </div>
+</%def>
+
+
+{% macro board_node_create_block(node) %}
+<div class="pagelet">
+	    <div class="newsCreate">
+		    <a href="/board/submit/{{node.name}}" class="clickButton">创建新主题</a>
+	    </div>
+</div>
+{% endmacro %}
+
+
+{% macro board_node_follow_block(node) %}
+	    <div class="box">
+	    <div class="newsCreate">
+		    <a href="/board/follow/{{node.name}}" class="clickButton">+ 关注话题</a>
+	    </div>
+	    </div>
+{% endmacro %}
+
+
+{% macro board_node_header_block(node) %}
+<div class="mainContent">
+  <a href="/board" class="highlight">首页</a> <span style="color:#aaa;">/</span>
+  {% if node and node.name %}
+		<a href="/board/node/{{ node.name }}" class="highlight">{{node.desc}}</a>
+  {% endif %}
+</div>
+{% endmacro %}
+
+
+
+
+{% macro board_node_help_block(node) %}
+
+{% if node.help %}
+<div class="rightBarBox">
+	<div class="boxInner">
+		<ul >
+{% for help in node.help %}
+			<li>
+				• {{help}}
+			</li>
+{% endfor %}
+		</ul>
+	</div>
+</div>
+{% endif %}
+
+{% endmacro %}
+
+
+
+
+
+{% macro board_content_block(topic_list, timeover) %}
+				<div class="mainContent">
+					{% set topic_num = 0 %}
+					{% for topic in topic_list %}
+					{% if topic.people %}
+					{% set topic_num = topic_num + 1 %}
+					{% set people_name = topic.people.username %}
+					{% set topic_link = '/board/topic/%s' % (topic.id)  %}
+					<dl class="newsEntry">
+					<dt class="avatar">
+<a href="/people/{{topic.people.username}}"><img src="{{topic.people.avatar_url}}"></a>
+</dt>
+					<dd>
+						
+						<div class="newsTitle">
+							
+							{{topic.html_content}}
+							{% if topic.media_content %}
+							{{topic.media_content}}
+						{% endif %}
+						
+						{% if topic.more_content %}
+							<a href="{{topic_link}}" title="更多内容"> <span><small class="gray">更多...</small></span> </a>
+						{% endif %}
+						
+							{% if topic.images %}
+								<div class="newsPreview">
+								{% for img in topic.images %}
+								<a href="{{topic_link}}"><img src="{{img.url}}"></a>
+								{% endfor %}
+								</div>
+							{% endif %}
+							
+							<div class="newsSubtitle">
+								<span class="newsAuthor"> {{topic.people.username}} </span>
+								
+								<span class="offset0"><a href="{{topic_link}}" class="gray" target="_blank" >{{timeover(topic.create_time)}} </a></span>
+								<span class="offset0">
+								{% if topic.node and topic.node.name %}
+								<a href="/board/node/{{topic.node.name}}" class="gray">{{topic.node.desc}}</a>
+								{% endif %}
+								</span>
+								<ul class="newsAction"><li>
+								{% if topic.comment_count<= 0 %}
+									<a href="{{topic_link}}" class="gray" show="none" id="comment{{topic.id}}" target="_blank">评论</a>
+								{% else %}
+								<a href="javascript:;" class="gray" target="_blank" onclick="comment_it('{{topic.id}}'); return false">评论({{topic.comment_count}})</a>
+								{% endif %}
+								
+								</li></ul>
+								
+								
+								
+							</div>
+							<div id="commentlist_{{topic.id}}" show="none">
+							</div>
+						</div>
+						
+					</dd>
+					<dt style="width:20px; float: right;">
+						
+					</dt>
+					<dd class="clear"></dd>
+					
+					</dl>
+					{% endif %}
+					{% endfor %}
+		 		</div>
+
+{% endmacro %}
+
+
+
+
+{% macro comment_list_ajax_block(comment_list, timeover,urlink) %}
+
+
+	{% set count = 0  %}
+	{% for comment in comment_list %}
+	{% set count = count + 1 %}
+	{% set people_name = '' %}
+
+	{% set avatar_url = '/static/image/profile.png' %}
+	{% if comment.people  %}
+		{% set people_name = comment.people.username %}
+		{% set avatar_url = comment.people.avatar_url %}
+	{% endif %}
+
+
+<li id="r{{count}}" class="commentItem">
+
+<dt class="commentAvatar">
+<a href="/people/{{people_name}}"><img src="{{avatar_url}}"></a>
+</dt>
+<dd class="commentTitle">
+<div class="commentDetail">
+
+<a href="/people/{{people_name}}" class="gray">{{people_name}}</a> : 
+
+<span class="commentText">
+{{comment.content|escape|urlize }} <span class="commentTime"> ({{timeover(comment.create_time)}})</span>
+</span
+
+</div>
+<div class="commentText rfloat displayNone">
+
+<a href="#reply" onclick="reply('{{people_name}}')">回复</a>
+
+</div>
+
+</dd>
+<div class="clear"></div>
+</li>
+{% endfor %}
+
+
+{% endmacro %}
+
+
+
+
+
+

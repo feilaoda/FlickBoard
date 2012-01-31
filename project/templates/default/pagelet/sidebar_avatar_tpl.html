@@ -1,0 +1,18 @@
+<div class="pagelet">
+{% if logged_in  %}
+    <div id="sideBarAvatar">
+            <a tabindex="-1" aria-hidden="true" href="/settings/profile"
+               class="welcomeBoxBlock lfloat">
+                    <img alt="" src="{{people.avatar_url}}" class="avatar" ></a>
+           
+            <div>
+                 <a href="/settings/profile" class="welcomeBoxName">编辑</a>
+                    
+            </div>
+            
+    </div>
+    <div class="navSeparator"></div>
+{% endif %}
+</div>
+
+

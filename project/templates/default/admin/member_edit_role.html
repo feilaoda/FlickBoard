@@ -1,0 +1,46 @@
+{% extends "templates/site/admin/index.html" %}
+
+
+{% block content_block %}
+
+{% set action_url = "id=%s&action=role" % (user.id) %}
+
+<div class="clearfix">
+<label for="member_name">{{user.username}}<span class="required">* 当前角色: {{role.permission}}</span></label>
+
+</div>
+
+<div class="form">
+
+<form id="role-form" action="/admin/edit_member?{{action_url}}" method="post">
+	
+
+
+	<p class="note">Fields with <span class="required">*</span> are required.</p>
+
+	
+	
+    <div class="clearfix">
+		<label for="Node_desc">权限<span class="required">*</span></label>
+		
+
+<select name="role_permission" id="city" defvalue="user">
+    <option value="user">普通用户 User</option>
+    <option value="master">普通管理员 Master</option>
+    <option value="admin">超级管理员 Admin</option>
+
+</select>
+</div>
+<div class="clearfix buttons">
+	<label></label>
+		<input type="submit" name="role_submit" value="Save" />
+	
+</div>
+	
+
+</form>
+</div>
+
+
+
+{% endblock %}

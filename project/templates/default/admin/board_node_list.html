@@ -1,0 +1,68 @@
+{% extends "admin/index.html" %}
+
+
+{% block content_block %}
+<div class="mainContent">
+<span><a href="/admin/board/node">Board Node</a></span>
+<span>Edit 节点</span>
+
+<div>
+	<table>
+		
+{% for n in nodes %}
+	<tr>
+		<td>
+			{{n.name}}
+		</td>
+		<td>
+			{{n.desc}}
+		</td>
+		<td>
+			<a href="javascript:if(confirm('确实要删除吗? 千万小心操作'))location='/admin/board/node?id={{n.id}}&action=delete'">删除</a>
+
+		</td>
+		
+		<td>
+			<a href="/admin/board/node?id={{n.id}}&action=edit">编辑</a>
+		</td>
+		
+		<td>
+		<a href="/admin/board/node?id={{n.id}}&action=count">统计Topic</a>
+		</td>
+
+	</tr>
+{% endfor %}
+	</table>
+</div>
+
+
+
+<div class="form">
+<h3>创建新节点</h3>
+<form id="node-form" action="/admin/board/node?action=create" method="post">
+	<p class="note">Fields with <span class="required">*</span> are required.</p>
+
+	
+	<div class="row">
+		<label for="Node_name">英文名<span class="required">*</span></label>
+		<input size="60" maxlength="128" name="node_name" id="Node_name" type="text" value="" />
+	</div>
+        <div class="row">
+		<label for="Node_desc">中文描述<span class="required">*</span></label>
+		<input size="100" maxlength="255" name="node_desc" id="Node_desc" type="text" value="" />
+		</div>
+		<div class="row">
+		<label for="Node_desc">中文帮助<span class="required">*</span></label>
+		
+		<textarea cols="70" id="Node_help" class="inputbox" name="node_help"  rows="8" placeholder="主题内容 "></textarea>
+	
+		</div>
+
+	<div class="row buttons">
+		<input type="submit" name="create_submit" value="Create" /></div>
+{{ xsrf_form_html() }}
+</form>
+</div>
+
+</div>
+{% endblock %}

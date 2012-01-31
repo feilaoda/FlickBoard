@@ -1,0 +1,100 @@
+{% extends "site.html" %}
+
+{% import 'pagelet/sidebar_nav_tpl.html' as nav %}
+{% import 'board/board_tpl.html' as tpl %}
+
+{% block rightbar_block %}
+
+{% endblock %}
+
+{% block script_block %}
+<link rel="stylesheet" type="text/css" href="/static/css/board.css" />
+{% block javascript_block %}
+<script  type="text/javascript" >
+
+function comment_it(topic_id){
+
+	var show = $('#commentlist_'+topic_id).attr('show');
+
+   if(show === 'none')
+   {
+	$.get('/board/commentlist?topic_id='+topic_id, function(data) {
+		$('#commentlist_'+topic_id).html(data);
+		});
+	  $('#commentlist_'+topic_id).attr('show','true');
+	}
+	else if(show === 'true')
+	{
+		$('#commentlist_'+topic_id).hide();
+		$('#commentlist_'+topic_id).attr('show','false');
+	}
+	else
+	{
+		$('#commentlist_'+topic_id).show();
+		$('#commentlist_'+topic_id).attr('show','true');
+	}
+}
+
+
+$(function() {
+    var $backToTopTxt = "返回顶部", $backToTopEle = $('<div class="backToTop"></div>').appendTo($(".rightBar"))
+        .text($backToTopTxt).attr("title", $backToTopTxt).click(function() {
+            $("html, body").animate({ scrollTop: 0 }, 120);
+    }), $backToTopFun = function() {
+        var st = $(document).scrollTop(), winh = $(window).height();
+        (st > 300)? $backToTopEle.show(): $backToTopEle.hide();
+        //IE6下的定位
+        if (!window.XMLHttpRequest) {
+            $backToTopEle.css("top", st + winh - 166);
+        }
+    };
+    $(window).bind("scroll", $backToTopFun);
+    $(function() { $backToTopFun(); });
+})();
+
+
+</script>
+{% endblock %}
+{% endblock %}
+
+
+{% block plusbar_block %}
+
+<div class="sideBar">
+<div class="pagelet">
+	{% if node_follower %}
+	<div class="boxTitle">
+		<h5>关注的话题</h5>
+	</div>
+	<div class="boxInner" align="left">
+	{% for n in node_follower.nodes %}
+	<a href="/board/node/{{n.name}}" class="highlight">{{n.desc}}</a>  
+	{% endfor %}
+	
+	</div>
+	{% endif %}
+
+
+    <div class="boxTitle">
+    <h5>热门话题</h5>
+    </div>
+    <div class="boxInner" align="left">
+		{% if node_list %}
+			{% for n in node_list %}
+			<a href="/board/node/{{n.name}}" class="highlight">{{n.desc}}</a>  
+			{% endfor %}
+		{% endif %}
+    </div>
+</div>
+</div>
+
+{% endblock %}
+
+
+{% block content_block %}
+
+{{ tpl.board_content_block(topic_list, timeover) }}
+
+{% endblock %}
+    
+

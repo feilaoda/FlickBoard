@@ -1,0 +1,21 @@
+<%inherit file="../site.html" />
+
+<div class="form">
+
+<form id="app-form" action="/admin/importapp" method="post">
+	<p class="note">Fields with <span class="required">*</span> are required.</p>
+
+	
+	<div class="row">
+		<label for="AppStoreUrl">App Store URL <span class="required">*</span></label>
+		<input size="100" maxlength="500" name="app_url" id="app_url" type="text" value="" />
+	</div>
+
+	<div class="row buttons">
+		<input type="submit" name="import_submit" value="Import" />	</div>
+
+</form>
+</div>
+
+
+

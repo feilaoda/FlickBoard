@@ -1,0 +1,17 @@
+
+.role_admin
+{
+    color: red;
+}
+
+.role_admin label
+{
+    color: red;
+}
+
+.role_master label
+{
+    color: blue;
+}
+
+

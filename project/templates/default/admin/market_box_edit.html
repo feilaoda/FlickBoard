@@ -1,0 +1,84 @@
+{% extends "templates/site/admin/index.html" %}
+
+
+{% block content_block %}
+<a href="/admin" >
+<span>主页</span>
+</a>
+
+<a href="/admin/market_box/all" >
+<span>盒子</span>
+</a>
+
+
+<div id="mainContent">
+
+	
+	<div id="content">
+		<div id="pageContent">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody>
+
+
+
+<tr style="height:10px"></tr>
+<tr><td>
+
+{% if box %}
+<form action="/admin/market_box/createbox?box_id={{box.id}}" method="POST">
+{% else %}
+<form action="/admin/market_box/createbox" method="POST">
+{% endif %}
+<table border="0" width="72%">
+    <tbody>
+	
+    <tr><td>
+{% if box_type_error %}
+<span class="errorInfo">类型: {{box_type_error}}</span>
+<br/>
+{% endif %}
+{% if box_title_error %}
+<span class="errorInfo">标题: {{box_title_error}}</span>
+<br/>
+{% endif %}
+{% if box_desc_error %}
+<span class="errorInfo">内容: {{box_desc_error}}</span>
+<br/>
+{% endif %}
+
+		<span>盒子类型:</span><input size="60" maxlength="128" name="box_type" id="Box_type" type="text" value="{{box.type}}"/>
+	</td></tr>
+	<tr style="height:10px"></tr>
+	<tr><td>	
+		<span>标题:</span><input size="60" maxlength="128" name="box_title" id="Box_title" type="text" value="{{box.title}}" />
+	</td></tr>
+	<tr><td>	
+		<span>排序:</span><input size="60" maxlength="128" name="box_order" id="Box_order" type="text" value="{{box.order}}" />
+	</td></tr>
+	<tr><td>	
+		<span>应用个数:</span><input size="60" maxlength="128" name="box_app_count" id="Box_appcount" type="text" value="{{box.app_count}}" />
+	</td></tr>
+	
+	<tr style="height:10px"></tr>
+    <tr><td>
+		<textarea cols="70" id="Box_desc" class="inputbox" name="box_desc"  rows="5" >{{box.desc}}</textarea>
+			<span>最大输入200个字</span>
+	 </td></tr>
+    <tr>
+    <td>
+    <input type="submit" name="market_submit" value="提交" class="submitButton">
+    </td></tr>
+   
+    </tbody></table>
+</form>
+
+</td></tr></tbody></table>
+
+</div>
+		
+	
+	</div>
+</div>
+    
+
+{% endblock %}

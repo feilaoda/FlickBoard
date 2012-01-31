@@ -1,0 +1,55 @@
+{% extends "site.html" %}
+
+{% block script_block %}
+<script type="text/javascript" src="/static/js/md5.js"></script>
+{% endblock %}
+
+
+{% block body_block %}
+<div id="mainContent">
+    <div class="loginContainer">
+    
+		{% block login_block %}
+		
+		{% if login_name_error %}
+		<span class="errorInfo">帐号: {{login_name_error}}</span>
+		{% endif %}
+		{% if login_password_error %}
+		<br/><span class="errorInfo">密码: {{login_password_error}}</span>
+		{% endif %}
+		
+			<form id="login_form" action="/login" method="POST" onsubmit="md5hash(login_password, login_md5password, login_md5password_utf, 0)">
+				<div class="clearfix">
+						<label for="xlInput">帐 号:</label>
+						<div class="input">
+								<input class="large" type="text" name="login_name" id="loginName" value="{{login_name}}" class="smallinput" max-length=20>
+						 </div>
+				</div>
+		
+				<div class="clearfix">
+						<label for="xlInput">密 码:</label>
+						<div class="input">
+								<input class="large" type="password" name="login_password" id="loginPassword" class="smallinput">
+								<input type="hidden" name="login_md5password">
+								<input type="hidden" name="login_md5password_utf">
+						</div>
+				</div>
+			
+			<hr class="clear">
+				<div class="clearfix">
+						<div class="input">
+						<input type="hidden" id="next" name="next" value="{{next}}">
+						<span class="offset1"><input type="submit" value="登 录" id="loginSubmit" name="login_submit" class="submitButton"></span>
+						<span class="offset0"> <a href="/signup">立即注册</a></span>
+						</div>
+				</div>
+			{{ xsrf_form_html() }}
+			</form>
+		
+		{% endblock %}
+    	
+	</div>
+</div>
+{% endblock %}
+
+

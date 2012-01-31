@@ -1,0 +1,144 @@
+{% extends "site.html" %}
+{% import 'pagelet/sidebar_nav_tpl.html' as nav %}
+
+
+{% block script_block %}
+<script type="text/javascript" src="/static/js/md5.js"></script>
+<script>
+    
+    
+    function editEmail(node) {
+      
+        $('#profiletip').text('提交中……');
+        $('#profiletip').fadeIn("slow");  
+        email= trim($('#login_email').val())
+		
+        $.ajax({
+            type: 'POST',
+            url: '/settings/email',    
+            data: {'email': email, '_xsrf':'{{token}}'},
+            success: function(json){
+
+            
+                    if(json.result == 'ok'){
+						$('#profiletip').text('修改邮箱成功');
+                    }
+					else if(json.result == 'redirect')
+					{
+						$(location).attr('href',json.url);
+					}
+            }
+        });
+        
+    }
+    
+    function editPassword(node) {
+      
+        $('#passwordtip').text('提交中……');
+        $('#passwordtip').fadeIn("slow");
+		oldpwd = trim($('#oldpwd').val());
+		newpwd = trim($('#newpwd').val());
+		newpwdtwo = trim($('#newpwdtwo').val());
+		if (oldpwd === '')
+		{
+			$('#passwordtip').text('请输入原密码');
+			return false;
+		}
+		
+		if (newpwd !== newpwdtwo)
+		{
+			$('#passwordtip').text('输入的二次密码不一致');
+			return false;
+		}
+		
+        oldpwdmd5 = hex_md5(trim($('#oldpwd').val()));
+		newpwdmd5 = hex_md5(trim($('#newpwd').val()));
+		newpwdtwomd5 = hex_md5(trim($('#newpwdtwo').val()));
+        $.ajax({
+            type: 'POST',
+            url: '/settings/password',    
+            data: {'oldpwdmd5': oldpwdmd5,'newpwdmd5': newpwdmd5, '_xsrf':'{{token}}'},
+            success: function(json){
+                        
+                    if(json.result == 'ok'){
+                        $('#oldpwd').val('');
+                        $('#newpwd').val('');
+						$('#newpwdtwo').val('');
+						$('#passwordtip').text('密码修改成功');
+                    }
+                    else if(json.result == 'redirect')
+                        {
+                            $(location).attr('href',json.url);
+                        }
+					else if(json.result == 'error')
+					{
+						$('#passwordtip').text(json.info);
+					}
+            }
+        });
+        
+    }
+    
+
+    </script>
+
+
+{% endblock %}
+
+
+
+
+{% block content_block %}
+<div class="mainContent">
+<div class="profile">
+        <span class="greyt">修改资料</span>
+            <hr class="clear">
+        <div id="avatartip" class="errorInfo"></div>
+        <div class="boxCell">
+    			<table cellpadding="5" cellspacing="0" border="0">
+    			    <tbody><tr>
+    			        <td width="80" align="right">
+    			            当前的头像
+    			        </td>
+    			        <td width="200" align="left">
+											<img src="{{people.avatar_url}}" border="0">&nbsp; 
+					     </td>
+    			    </tr><tr>
+    			        <td width="80" align="right">
+    			            <a href="/settings/avatar">更改头像</a>
+    			        </td>
+    			        <td width="200" align="left">
+
+					     </td>
+    			    </tr>
+    			</tbody>
+                </table>
+</div>
+
+
+        <hr class="clear">
+             <div id="passwordtip" class="errorInfo"></div>
+
+            <p>
+            <label for="password">旧密码</label>
+            <input type="password" name="oldpwd" id="oldpwd" value="" class="medium">
+            </p>
+            <p>
+            <label for="password">新密码</label>
+            <input type="password" name="newpwd" id="newpwd" value="" class="medium">
+            </p>
+			<p>
+            <label for="password">重复密码</label>
+            <input type="password" name="newpwdtwo" id="newpwdtwo" value="" class="medium">
+            </p>
+            <p><input type="submit" value="更改密码" id="editPassword" class="submitButton" onclick="editPassword(this)">
+        </p>
+            </div>
+ </div>
+{% endblock %}
+
+
+
+
+
+

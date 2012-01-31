@@ -1,0 +1,16 @@
+{% extends "templates/site/member/index.html" %}
+
+
+
+{% block content_block %}
+
+            <div class="profile">
+                <div><a href="">{{user.username}}</a></div>
+                <div>
+            <a tabindex="-1" aria-hidden="true" href="/member/info/{{user.username}}"
+               class="welcomeBoxBlock blockImage">
+                    <img alt="" src="{{user.avatar_url}}" class="img" style="width: 60px"></a>
+                </div>
+            </div>
+
+{% endblock %}

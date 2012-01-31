@@ -1,0 +1,217 @@
+
+.rlistContent
+{
+	margin: 0px 10px 20px 10px;
+	-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+}
+
+.rlistHeader
+{
+	background-color: #323232;
+	margin: 0 0 20px 0;
+	padding: 5px 10px;
+}
+
+.rlistHeaderLink
+{
+		color: white;
+		padding: 0 10px;
+}
+
+.rlistHeaderLink:hover
+{
+	text-decoration: underline;
+}
+
+.rlistClicked
+{
+	color: #aaa;
+}
+
+.rlistTag 
+{
+font-size: 10px;
+display: inline-block;
+margin: 3px 0 0 0;
+padding: 0px 10px;
+background-color: #AAB5C2;
+-webkit-border-radius: 12px;
+-moz-border-radius: 12px;
+-o-border-radius: 12px;
+border-radius: 12px;
+color: white;
+text-decoration: none;
+}
+
+.rlistTagGray
+{
+ margin: 0 10px 5px 0;
+padding: 2px 8px;
+background-color: #ddd;
+-webkit-border-radius: 12px;
+-moz-border-radius: 12px;
+border-radius: 12px;
+}
+
+
+
+.rlistTagGray a
+{
+    padding-left: 10px;
+    color: #181818;
+}
+
+.rlistLikedIt
+{
+background-color: transparent;
+display: block; 
+}
+
+
+
+
+.rlistButtons, .rlistActions{
+float: right;
+height: 25px;
+top: auto;
+bottom: 4px;
+right: 3px;
+z-index: 3;
+list-style: none;
+}
+
+
+.rlistActions
+{
+position: absolute;
+display: none;
+list-style-type: none;
+top: 0;
+margin: 0;
+padding: 0 10px;
+background: #F8F8F8;
+border: 0px dashed #444;
+-webkit-border-radius: 0 0 8px 8px;
+-moz-border-radius: 0 0 8px 8px;
+border-radius: 8px;
+}
+
+.rlistButtons li, .rlistActions li {
+float: left;
+margin-left: 3px;
+-moz-transition: opacity 0.1s linear;
+-webkit-transition: opacity 0.1s linear;
+-o-transition: opacity 0.1s linear;
+}
+
+
+
+.rlistCell {
+padding: 15px 0;
+margin: 0;
+border-top: 1px solid #DDD;
+}
+
+.rlistCellAjax
+{
+padding: 0;
+text-align: center;
+background-color: #F0F0F0;
+}
+
+
+.rlistBox
+{
+margin: 0 0 0 30px;
+position: relative;
+
+}
+
+.rlistBoxContent
+{
+width: 500px;
+overflow: hidden;
+word-wrap: break-word;
+}
+
+
+
+
+a.rlistTitleLink, a.rlistTitleLink:visited {
+color: black;
+font-size: 15px;
+line-height: 22px;
+}
+
+.rlistLikeBox {
+float: left;
+width: 26px;
+padding-top: 4px;
+}
+
+
+.rlistSubTitle {
+text-align: right;
+padding-right: 5px;
+padding-top: 10px;
+font-size: 10px;
+color: #888;
+
+}
+
+.rlistURLTitle
+{
+	margin-left: 10px;
+width: 85%;
+ text-align: left;
+}
+
+.rlistTagList
+{
+line-height: 20px;
+
+}
+
+
+
+.rlistTagText
+{
+	float: left;
+color: white;
+}
+
+.rlistTagRemove
+{
+float: left;
+margin: 0 3px 0 5px;
+background: transparent url(/static/image/remove.png) scroll no-repeat -1px -1px;
+}
+
+.rlistTagList img
+{
+margin: 0 5px;
+}
+
+.rlistTagList li.newTagItem {
+margin: 0 5px 5px 0;
+position: relative;
+display: inline;
+}
+
+
+.rlistTagEdit {
+right: -11px;
+top: -15px;
+
+text-align: left;
+font-size: 13px;
+border: 2px solid #555;
+background-color: white;
+padding: 10px 10px 10px 20px;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+z-index: 9999;
+}

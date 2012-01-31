@@ -1,0 +1,295 @@
+/*
+* yihoudu.com
+* Author: feilaoda
+* yihouducommunity.?
+*
+*/
+
+
+/*news css*/
+
+.newsHeader
+{
+height: 30px;
+margin-bottom: 10px;
+}
+
+.newsHeader a
+{
+    color: #222;
+    font-size: 15px;
+}
+
+
+
+.newsTop {
+margin-left: 5px;
+float: left;
+font-size: 16px;
+}
+
+
+
+
+
+.newsVote {
+float: left;
+margin-top: 5px;
+margin-right: 3px;
+margin-left: 3px;
+background: transparent;
+overflow: hidden;
+width: 30px;
+}
+
+.newsArrowup {
+height: 30px;
+display: block;
+background-position: center center;
+background-repeat: no-repeat;
+width: 15px;
+background-image: url(images/up.png);
+}
+
+.newsEntry {
+padding: 15px 0px ;
+margin-bottom: 0;
+border-top: 1px dotted #999;
+-webkit-transition: background-color .3s ease-in-out;
+-moz-transition: background-color .3s ease-in-out;
+}
+
+.newsEntry:hover
+{
+    background-color: #F8F8F8;
+}
+
+
+
+
+.newsLogo
+{
+    width: 40px;
+	
+    float: left;
+}
+
+.newsTitle {
+margin-left: 60px;
+font-size: 15px;
+line-height: 24px;
+color: #444;
+}
+
+.newsTitle a{
+	word-wrap: break-word;
+}
+
+
+.newsTitleText
+{
+	margin-right:50px;
+}
+
+.newsTitle img
+{
+    max-width: 80px;
+    max-height: 80px;
+}
+
+
+.newsDetail{
+padding: 20px 0;
+}
+
+
+
+.newsSubtitle
+{
+    font-size: 13px;
+    color: #aaa;
+    line-height: 18px;
+	margin-top: 10px;
+	position: relative;
+}
+
+.newsSubtitle a
+{
+    font-size: 13px;
+
+    line-height: 18px;
+
+}
+
+.newsAction
+{
+
+padding: 0;
+color: #999;
+position: absolute;
+top: 0px;
+right: 5px;
+text-align: right;
+
+}
+
+.newsPreview {
+margin: 8px 0;
+float: left;
+position: relative;
+}
+
+.newsPreview img {
+padding-right: 10px;
+max-width: 60px;
+max-height: 100px;
+}
+
+
+.newsAuthor
+{
+
+	font-size: 14px;
+}
+ 
+.newsCreate
+{
+    margin: 10px 30px;
+}
+
+ 
+
+.newsAppLogo
+{
+    float: left;
+    margin: 0 0 10px 0;
+}
+
+.createVideo
+{
+	border: 1px solid #ccc;
+	padding: 20px;
+}
+
+/*comment css*/
+
+
+.mainComment
+{
+padding: 10px;
+font-size: 13px;
+}
+
+.mainComment a
+{
+	font-size: 13px;
+}
+
+#commentList {
+list-style-type: none;
+margin: 0px;
+padding-bottom: 20px;
+}
+
+.commentItem {
+padding: 10px 0;
+border-top: 1px dashed #DDD;
+}
+
+.commentAvatar {
+height: 40px;
+width: 40px;
+float: left;
+}
+
+.commentAvatar img
+{
+    width: 35px;
+	height: 35px;
+}
+
+.commentTitle {
+margin-left: 45px;
+}
+
+.commentDetail {
+}
+
+.commentAuthor a {
+font-weight: bold;
+}
+
+.commentTime
+{
+    color: #AAA;
+	font-size: 13px;
+}
+
+.commentText {
+color: #333;
+line-height: 22px;
+margin-top: 5px;
+word-wrap: break-word;
+
+}
+
+.commentText p
+{
+margin: 0;
+}
+
+/*member css*/
+.profile {
+padding-left: 20px;
+}
+
+.profile label{
+text-align: left;
+width: 80px;
+}
+
+.avatar 
+{
+    float: left;
+	height: 50px;
+	width: 50px;
+	margin: 0 10px 0 0;
+}
+
+.avatar img
+{
+    width: 50px;
+	height: 50px;
+	background: white;
+}
+
+.mediaKind a {
+margin: 0 20px 0 0;
+display: inline-block;
+height: 14px;
+padding: 2px 0 2px 19px;
+line-height: 14px;
+}
+
+.mediaKind .video
+{
+background: url(images/video.png) no-repeat;
+
+}
+.mediaKind .picture
+{
+background: url(images/picture.png) no-repeat;
+}
+
+.mediaVideo
+{
+    width: 480px;
+    margin: auto;
+    padding: 5px;
+    background-color: #ddd;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+
