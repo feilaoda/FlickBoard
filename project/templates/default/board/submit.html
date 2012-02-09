@@ -50,6 +50,7 @@ $("#uploadVideo").hide();
 {{ tpl.board_node_header_block(node) }}
 
 <div class="mainContent">
+<div class="newsContent">
 <form action="/board/submit/{{node.name}}" method="POST">
 
 <div class="clearfix"></div>
@@ -137,7 +138,7 @@ $("#uploadVideo").hide();
 {{ xsrf_form_html() }}
 </form>
 </div>
-
+</div>
 
 
 {% endblock %}

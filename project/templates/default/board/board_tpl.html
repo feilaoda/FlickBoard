@@ -13,9 +13,35 @@
 	    <div class="newsCreate">
 		    <a href="/board/submit/{{node.name}}" class="clickButton">创建新主题</a>
 	    </div>
+	    
 </div>
 {% endmacro %}
 
+{% macro board_send_topic_block(node) %}
+<div class="newsCreate sendNewTopic">
+		
+<div class="title"></div>
+<div class="num" node-type="num" style="display: none">请文明发言，还可以输入<span>140</span>字</div>
+
+<div>
+<div class="top_border">
+<div class="bottom_border"><textarea tabindex="1" title="微博输入框" name="" node-type="textEl" style="height: 55px;width:98%;"></textarea>
+<div class="send_succpic" style="display: none" node-type="successTip"></div>
+</div>
+</div>
+</div>
+
+<div class="btns">
+		    <a href="/board/submit/{{node.name}}" class="clickButton">创建新主题</a>
+</div>
+<div class="kind W_linkb" node-type="widget" node-data="number=4">
+<div class="limits W_linkb"><a suda-data="key=tblog_edit_exposure&amp;value=edit_click" action-type="showPublishTo" node-type="showPublishTo" href="javascript:void(0)" onclick="return false" class="W_moredown" title="公开-你发表的微博可以被大家公开查看哦"><em><img src="http://img.t.sinajs.cn/t4/style/images/common/transparent.gif" alt="公开" class="i_conn_public"> 公开</em><span class="more"></span></a></div>
+<a tabindex="3" href="javascript:void(0);" class="face" action-type="face" title="表情">表情</a><a tabindex="3" href="javascript:void(0);" class="img" action-type="image" title="图片">图片</a><a tabindex="3" href="javascript:void(0);" class="movie" action-type="video" title="视频">视频</a><a tabindex="3" href="javascript:void(0);" class="music" action-type="music" title="音乐">音乐</a><a tabindex="3" href="javascript:void(0);" class="topic" action-type="topic" title="话题">话题</a><a tabindex="3" href="javascript:void(0);" class="vote" action-type="vote" title="投票">投票</a><span node-type="cont_btns"></span>
+</div>
+<div class="layer_tips" style="left: 0px; top: -5px; display: none; position: absolute; width: auto; padding-right: 20px; " node-type="outer"><div node-type="inner"></div><a node-type="close" class="W_close_color" href="#" onclick="return false;" suda-data="key=issu_guide&amp;value=close"></a><span node-type="arrow" class="arrow_down" style="left: 30px; "></span></div></div>
+
+
+{% endmacro %}
 
 {% macro board_node_follow_block(node) %}
 	    <div class="box">
@@ -64,6 +90,7 @@
 
 {% macro board_content_block(topic_list, timeover) %}
 				<div class="mainContent">
+					
 					{% set topic_num = 0 %}
 					{% for topic in topic_list %}
 					{% if topic.people %}
@@ -77,16 +104,20 @@
 					<dd>
 						
 						<div class="newsTitle">
-							
+							<div class="newsRow">
+								<span class="newsAuthor"> <a href="/people/{{topic.people.username}}">{{topic.people.username}}</a> </span>
+							</div>
+							<div class="newsRow">
 							{{topic.html_content}}
 							{% if topic.extra_content %}
 							{{topic.extra_content}}
 						{% endif %}
 						
 						{% if topic.more_content %}
-							<a href="javascript:;" title="更多内容" id="newsMoreAction{{topic.id}}" onclick="load_morecontent('{{topic.id}}')"> <span><small>.&nbsp;.&nbsp;.</small></span> </a>
-							<p><div id="newsMore{{topic.id}}" class="newsMoreContent"></div></p>
-						
+							<a href="javascript:;" title="更多内容" id="newsMoreAction{{topic.id}}" onclick="load_morecontent('{{topic.id}}')">
+								<span><small>.&nbsp;.&nbsp;.</small></span>
+							</a>
+							<div id="newsMore{{topic.id}}" class="newsMoreText"></div>
 						{% endif %}
 							
 							{% if topic.images %}
@@ -96,17 +127,20 @@
 								{% endfor %}
 								</div>
 							{% endif %}
-							
+							</div>
+							<div class="newsRow">
 							<div class="newsSubtitle">
-								<span class="newsAuthor"> {{topic.people.username}} </span>
 								
-								<span class="offset0"><a href="{{topic_link}}" class="gray" target="_blank" >{{timeover(topic.create_time)}} </a></span>
+								<span ><a href="{{topic_link}}" class="gray" target="_blank" >{{timeover(topic.create_time)}} </a></span>
 								<span class="offset0">
 								{% if topic.node and topic.node.name %}
 								<a href="/board/node/{{topic.node.name}}" class="gray">{{topic.node.desc}}</a>
 								{% endif %}
 								</span>
-								<ul class="newsAction"><li>
+								
+								<ul class="newsAction">
+								
+								<li>
 								{% if topic.comment_count<= 0 %}
 									<a href="{{topic_link}}" class="gray" show="none" id="comment{{topic.id}}" target="_blank">评论</a>
 								{% else %}
@@ -115,10 +149,9 @@
 								
 								</li></ul>
 								
-								
-								
-							</div>
-							<div id="commentlist_{{topic.id}}" show="none">
+								</div>
+								<div id="commentlist_{{topic.id}}" show="none">
+								</div>
 							</div>
 						</div>
 						

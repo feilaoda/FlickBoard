@@ -188,7 +188,7 @@ line-height: 18px;
 }
 
 .inputbox{
-    height:150px; width:99%;
+    height:100px; width:99%;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border: 1px solid #ccc;

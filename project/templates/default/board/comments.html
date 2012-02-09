@@ -1,7 +1,10 @@
 {% import 'board/board_tpl.html' as tpl %}
+<div class="commentContent">
 <div class="mainComment">
+
 <ul id="commentList">
 {{tpl.comment_list_ajax_block(comment_list, timeover)}}
-<li><a class="rfloat gray" href="/board/topic/{{topic.id}}" target="_blank">查看更多&gt;&gt;</a></li>
+<li><a class="rfloat" href="/board/topic/{{topic.id}}" target="_blank">查看更多&gt;&gt;</a></li>
 </ul>
+</div>
 </div>

@@ -7,6 +7,7 @@
 
 
 
+{% block title %} <title>{{topic.html_content}}</title>{% endblock %}
 
 
 {% block rightbar_block %}
@@ -89,16 +90,18 @@ function reply(username){
 
 
 {% block content_block %}
-  
+
 {{ tpl.board_node_header_block(node) }}
 
 
     <div class="mainContent">
+	<div class="newsContent">
 		{% if topic %}
 			{{board_topic_content_block(topic)}}
             <div class="navSeparator"></div>
             {{board_topic_comment_block(topic, comment_list)}}
 		{% endif %}
+	</div>
     </div>
 
 {% endblock %}
@@ -112,25 +115,24 @@ function reply(username){
 
 
 <div class="newsDetail">
-
-    <div >
-	  <dl>
-		<dt class="avatar">
-<a href="/people/{{topic.people.username}}"><img src="{{topic.people.avatar_url}}"></a>
+<dl>
+<dt class="avatar">
+<a href="/people/费老大"><img src="/static/image/profile.png"></a>
 </dt>
-		
-		<dd class="newsTitle">
+<dd>
+
+		<div class="newsTitle">
 		  {% if topic.title %}
 			<h5>{{topic.title}}</h5>
 			{% endif %}
 		{{topic.html_content}}
 
-{% if topic_more_content %}
-<p></p>{{ topic_more_content }}
-{% endif %}
+		{% if topic_more_content %}
+		<p></p>{{ topic_more_content }}
+		{% endif %}
 
-		  
-		    <div class="newsSubtitle">
+		
+		<div class="newsSubtitle">
 <!--
 {% if not topic_has_voted %}  
         <span class="lfloat">
@@ -142,7 +144,7 @@ function reply(username){
         <span>{{topic.up_vote}}赞</span>
 -->
 
-        <span class="newsAuthor"> {{topic.people.username}} </span>
+        <span > <a href="/people/{{topic.people.username}}" class="newsAuthor">{{topic.people.username}}</a></span>
         <span class="offset0"> {{timeover(topic.create_time)}} </span>
 
 {% if topic_can_edit %}
@@ -152,14 +154,12 @@ function reply(username){
 {% endif %}
             
     </div>
-		</dd>
-		
-	  </dl>
+</div>
 
-</div> 
-   
+ 
 
-
+</dd>
+</dl>
 </div>
 
 {% endmacro %}
@@ -195,19 +195,21 @@ function reply(username){
     <div>
         <form action="/board/comment/{{topic.id}}#comments" method="POST">
             <p>
-            <input type="hidden" id="id_topic" name="topic_id" value="{{topic.id}}">
-            <input type="hidden" id="id_topic_url" name="topic_url" value="/board/topic/{{topic.id}}">
+            <input type="hidden" id="id_topic" name="topic_id" value="{{topic.id}}" />
+            <input type="hidden" id="id_topic_url" name="topic_url" value="/board/topic/{{topic.id}}" />
             <textarea style="height:100px; width:98%;" name="comment_content" id="id_comment_content" cols="40" class="inputbox">{{comment_content|escape}}</textarea>
-            <div>
+			</p>
+		    <p>
 			<span class="help-block">最多可以输入300个字</span>
 			
 			<span class="help-block">请认真考虑自己的回复, 这里不欢迎无意义的内容“顶”，“沙发”，等等。</span>
-			</div>
 			</p>
-            <p class="rfloat">
-            <input id="id_comment_submit" type="submit" value=" 发表回复 " name="comment_submit" class="submitButton">
-            </p>
+			
+            <div>
+            <input id="id_comment_submit" type="submit" value=" 发表回复 " name="comment_submit" class="submitButton" />
             {{ xsrf_form_html() }}
+            </div>
+            
         </form>
     </div>
 {% else %}

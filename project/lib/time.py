@@ -17,7 +17,7 @@ def timeover(time):
     s = timedelta_to_seconds(delta)
     #return "%s,%s" % (str(delta.days), str(delta.seconds))
     if s >= (2*24*60*60):
-        return time.strftime('%Y-%m-%d %H:%M')
+        return time.strftime('%m月%d日')
     elif s >= (24*60*60):
         days = int(s//(24*60*60))
         return u'%d天前' % days

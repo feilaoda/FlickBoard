@@ -195,7 +195,8 @@ class BoardTopicSubmitHandler(BaseHandler):
         node = BoardNode.get_by_name(node_name)
         if not node:
             self.about(404)
-        self.render("board/submit.html", node=node)
+        node_list = fetch_cached_board_nodelist()
+        self.render("board/submit.html", node=node, node_list=node_list)
     
     @authenticated
     def post(self, node_name=None):

@@ -39,13 +39,14 @@
 <tr bgcolor="#ddd">
 	<td><a href="javascript:if(confirm('确实要删除吗? 千万小心操作'))location='/admin/board/topic?action=delete&topic_id={{topic.id}}'">删除</a></td>
 	<td><a href="/admin/board/topic?action=edit&topic_id={{topic.id}}">编辑</a></td>
+	<td>{{topic.node.desc}}</td>
 	<td>{{topic.id}}</td>
 	<td>{{topic.people.username}}</td>
 	
 </tr>
 <tr>
 
-	<td colspan=3>{{topic.content|escape|urlize}}</td>
+	<td colspan=5>{{topic.content|escape|urlize}}</td>
 </tr>
 {% endfor %}
 </table>

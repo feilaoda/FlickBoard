@@ -7,6 +7,8 @@ import shlex
 import re
 import subprocess
 import tornado
+import hashlib
+import random
 from tornado.options import define, options
 from tornado.web import URLSpec
 
@@ -15,6 +17,10 @@ class _NoDefault:
     def __repr__(self):
         return '(No Default)'
 NoDefault = _NoDefault()
+
+def random_hash():
+    return hashlib.md5(str(random.random())).hexdigest()
+
 
 def string2int(s, default=0):
     try:

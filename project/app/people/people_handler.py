@@ -258,7 +258,16 @@ class PeopleAvatarHandler(BaseHandler):
                 
                 return self.redirect('/settings/avatar')
 
-
+class PeopleInfoHandler(BaseHandler):
+    
+    @authenticated
+    def get(self, people_name):
+        people = People.find_by_name(people_name)
+        if people:
+            return self.render("people/info.html", people=people)
+        else:
+            return about(404)
+        
 
 
 
@@ -573,5 +582,5 @@ handlers = [
             #(r"/login/friendfeed", FriendfeedLoginHandler),
             #(r"/user/profile", ProfileHandler),
             #(r"/user/check", UserCheckHandler),
-            #(r"/user/([a-z0-9\-_]{3,32})", UserHandler),
+            (r"/people/(.*)", PeopleInfoHandler),
             ]
